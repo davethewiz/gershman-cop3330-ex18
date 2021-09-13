@@ -3,34 +3,31 @@
  *  Copyright 2021 Dave Gershman
  */
 
-import java.util.Hashtable;
-
 public class App
 {
-    public static double GetBAC(double A, double W, double r, double H) {
-        return (A * 5.14 / W * r) - 0.015 * H;
+    public static void f_to_c() {
+        double f = Input.GetDouble("Please enter the temperature in Fahrenheit: ");
+        double c = (f - 32d) * 5d / 9d;
+
+        System.out.printf("The temperature in Celsius is %.0f.", c);
+    }
+
+    public static void c_to_f() {
+        double c = Input.GetDouble("Please enter the temperature in Celsius: ");
+        double f = (c * 9d / 5d) + 32;
+
+        System.out.printf("The temperature in Fahrenheit is %.0f.", f);
     }
 
     public static void main( String[] args )
     {
-        int gender = Input.GetInt("Enter a 1 if you are male or a 2 if you are female: ");
-        double oz_alcohol = Input.GetDouble("How many ounces of alcohol did you have? ");
-        double weight = Input.GetDouble("What is your weight in pounds? ");
-        double hours = Input.GetDouble("How many hours has it been since your last drink? ");
+        System.out.println("Press C to convert from Fahrenheit to Celsius.");
+        System.out.println("Press F to convert from Celsius to Fahrenheit.");
+        String convertType = Input.GetString("Your choice: ").toLowerCase();
 
-        double r = 0f;
-        if (gender == 1)
-            r = 0.73f;
-        else if (gender == 2)
-            r = 0.66f;
-
-        double BAC = GetBAC(oz_alcohol, weight, r, hours);
-
-        System.out.printf("Your BAC is %.6f\n", BAC);
-
-        if (BAC >= 0.08)
-            System.out.print("It is not legal for you to drive.");
-        else
-            System.out.print("It is legal for you to drive.");
+        if (convertType.equals("c"))
+            f_to_c();
+        else if (convertType.equals("f"))
+            c_to_f();
     }
 }
